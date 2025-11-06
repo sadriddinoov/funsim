@@ -1,0 +1,45 @@
+{
+  "name": "happy",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build --turbopack",
+    "start": "next start",
+    "lint": "eslint"
+  },
+  "dependencies": {
+    "@tanstack/react-query": "^5.87.1",
+    "@tanstack/react-query-devtools": "^5.87.1",
+    "axios": "^1.12.1",
+    "framer-motion": "^12.23.12",
+    "i18next": "^25.5.2",
+    "keen-slider": "^6.8.6",
+    "ldrs": "^1.1.7",
+    "lucide-react": "^0.542.0",
+    "next": "15.5.2",
+    "next-intl": "^4.3.6",
+    "pusher-js": "^8.4.0",
+    "qrcode.react": "^4.2.0",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "react-i18next": "^15.7.3",
+    "react-input-mask": "^3.0.0-alpha.2",
+    "react-input-mask-next": "^3.0.0-alpha.12",
+    "react-social-icons": "^6.25.0",
+    "react-toastify": "^11.0.5",
+    "socket.io-client": "^4.8.1"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3",
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@types/react-input-mask": "^3.0.6",
+    "eslint": "^9",
+    "eslint-config-next": "15.5.2",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}
