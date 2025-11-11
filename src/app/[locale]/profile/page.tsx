@@ -255,11 +255,11 @@ const Profile = () => {
                       </div>
                     ) : (
                       <div className="relative flex items-center justify-between w-full bg-white p-2 rounded-lg border cursor-pointer">
-                        <span className="text-[#F06F1E]">
+                        <span className="text-[#FFB800]">
                           {fileName || "Загрузить"}
                         </span>
                         <label className="cursor-pointer">
-                          <Download className="text-[#F06F1E] w-6 h-6" />
+                          <Download className="text-[#FFB800] w-6 h-6" />
                           <input
                             type="file"
                             className="hidden"

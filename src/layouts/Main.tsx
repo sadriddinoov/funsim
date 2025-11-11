@@ -212,8 +212,8 @@ const Main = () => {
         <Image className="main-map" src={ASSETS.bgmap} alt="" />
         <div className="main-container">
           <div className="container relative lg:flex-row flex-col gap-[15px] flex lg:gap-[100px]">
-            <div className="main-download mt-[50px] w-[150px] h-[150px] rounded-full border border-[#F06F1E] flex items-center justify-center">
-              <p className="text-[#F06F1E] text-center">
+            <div className="main-download mt-[50px] w-[150px] h-[150px] rounded-full border border-[#FFB800] flex items-center justify-center">
+              <p className="text-[#FFB800] text-center">
                 {p("download.title")}
               </p>
             </div>
@@ -223,15 +223,13 @@ const Main = () => {
               <div>
                 <a
                   href="#phone"
-                  className="text-[#F06F1E] text-[20px] underline"
+                  className="text-[#FFB800] text-[20px] underline"
                 >
                   {t("support")}
                 </a>
               </div>
               <ul className="main-list">
                 <p className="main-item">{t("nav1")}</p>
-                <p className="main-item">{t("nav2")}</p>
-                <p className="main-item hidden sm:block">{t("nav3")}</p>
               </ul>
 
               <div className="lg:flex flex-col">

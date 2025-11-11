@@ -51,16 +51,16 @@ export const FooterNav = ({ openAuthModal }: FooterNavProps) => {
         <Link
           href={APP_ROUTES.HOME}
           className={`flex flex-col justify-center items-center gap-[3px] ${
-            isActiveHome ? "text-[#F06F1E]" : ""
+            isActiveHome ? "text-[#FFB800]" : ""
           }`}
         >
           <House
             size={25}
-            className={isActiveHome ? "text-[#F06F1E]" : "text-[#C6C6C6]"}
+            className={isActiveHome ? "text-[#FFB800]" : "text-[#C6C6C6]"}
           />
           <p
             className={`text-center text-[12px]/[14px] md:text-[14px]/[16px] font-medium ${
-              isActiveHome ? "text-[#F06F1E]" : "text-[#00000094]"
+              isActiveHome ? "text-[#FFB800]" : "text-[#00000094]"
             }`}
           >
             {t("footernav.main")}
@@ -71,16 +71,16 @@ export const FooterNav = ({ openAuthModal }: FooterNavProps) => {
         <div
           onClick={() => handleIsAutheticated(APP_ROUTES.MY_SIMS)}
           className={`flex flex-col justify-center items-center gap-[3px] cursor-pointer ${
-            isActiveMySims ? "text-[#F06F1E]" : ""
+            isActiveMySims ? "text-[#FFB800]" : ""
           }`}
         >
           <CardSim
             size={25}
-            className={isActiveMySims ? "text-[#F06F1E]" : "text-[#C6C6C6]"}
+            className={isActiveMySims ? "text-[#FFB800]" : "text-[#C6C6C6]"}
           />
           <p
             className={`text-center text-[12px]/[14px] md:text-[14px]/[16px] font-medium ${
-              isActiveMySims ? "text-[#F06F1E]" : "text-[#00000094]"
+              isActiveMySims ? "text-[#FFB800]" : "text-[#00000094]"
             }`}
           >
             {t("footernav.myesims")}
@@ -91,16 +91,16 @@ export const FooterNav = ({ openAuthModal }: FooterNavProps) => {
         <div
           onClick={() => handleIsAutheticated(APP_ROUTES.PROFILE)}
           className={`flex flex-col justify-center items-center gap-[3px] cursor-pointer ${
-            isActiveProfile ? "text-[#F06F1E]" : ""
+            isActiveProfile ? "text-[#FFB800]" : ""
           }`}
         >
           <User
             size={25}
-            className={isActiveProfile ? "text-[#F06F1E]" : "text-[#C6C6C6]"}
+            className={isActiveProfile ? "text-[#FFB800]" : "text-[#C6C6C6]"}
           />
           <p
             className={`text-center text-[12px]/[14px] md:text-[14px]/[16px] font-medium ${
-              isActiveProfile ? "text-[#F06F1E]" : "text-[#00000094]"
+              isActiveProfile ? "text-[#FFB800]" : "text-[#00000094]"
             }`}
           >
             {t("footernav.profile")}

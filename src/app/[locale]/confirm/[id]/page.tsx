@@ -415,7 +415,7 @@ const ConfirmPage = () => {
                         <div className="relative">
                           <input
                             type="text"
-                            className="w-full bg-white p-2 text-[#F06F1E] rounded-lg"
+                            className="w-full bg-white p-2 text-[#FFB800] rounded-lg"
                             value={fileName || "Загрузить"}
                             readOnly
                           />
@@ -440,7 +440,7 @@ const ConfirmPage = () => {
                         key={item?.id}
                         className={`w-full h-[60px] md:h-[85px] flex items-center justify-center bg-white rounded-[12px] cursor-pointer ${
                           selectedMethod === item?.id
-                            ? "border border-[#F06F1E]"
+                            ? "border border-[#FFB800]"
                             : "border border-transparent"
                         }`}
                         onClick={() => {
@@ -468,7 +468,7 @@ const ConfirmPage = () => {
                       type="checkbox"
                       checked={agreeToPolicy}
                       onChange={(e) => setAgreeToPolicy(e.target.checked)}
-                      className="w-4 h-4 sm:w-5 sm:h-5 rounded-lg border-2 bg-white text-[#F06F1E] cursor-pointer"
+                      className="w-4 h-4 sm:w-5 sm:h-5 rounded-lg border-2 bg-white text-[#FFB800] cursor-pointer"
                     />
                     <div className="flex flex-col sm:flex-row items-center gap-1 sm:gap-2 text-center sm:text-left">
                       <p className="text-xs sm:text-sm font-medium text-[#1C1C1C]">
@@ -476,7 +476,7 @@ const ConfirmPage = () => {
                         <a
                           href={APP_ROUTES.CONFIDENTIAL}
                           rel="noopener noreferrer"
-                          className="text-[#F06F1E] font-semibold underline"
+                          className="text-[#FFB800] font-semibold underline"
                         >
                           {t("auth.privacy_policy")}
                         </a>
@@ -487,7 +487,7 @@ const ConfirmPage = () => {
                       <a
                         href={APP_ROUTES.OFFER}
                         rel="noopener noreferrer"
-                        className="text-[#F06F1E] font-semibold underline text-xs sm:text-sm"
+                        className="text-[#FFB800] font-semibold underline text-xs sm:text-sm"
                       >
                         {t("auth.offerta")}
                       </a>
@@ -506,7 +506,7 @@ const ConfirmPage = () => {
                             name="keshback"
                             checked={AgreeToKeshback === true}
                             onChange={() => setAgreeToKeshback(true)}
-                            className="w-4 h-4 sm:w-5 sm:h-5 rounded-full border-2 border-[#595959] bg-white text-[#F06F1E]"
+                            className="w-4 h-4 sm:w-5 sm:h-5 rounded-full border-2 border-[#595959] bg-white text-[#FFB800]"
                           />
                           <span className="text-xs sm:text-sm font-medium text-[#1C1C1C]">
                             {t("yes")}
@@ -518,7 +518,7 @@ const ConfirmPage = () => {
                             name="keshback"
                             checked={AgreeToKeshback === false}
                             onChange={() => setAgreeToKeshback(false)}
-                            className="w-4 h-4 sm:w-5 sm:h-5 rounded-full border-2 bg-white text-[#F06F1E]"
+                            className="w-4 h-4 sm:w-5 sm:h-5 rounded-full border-2 bg-white text-[#FFB800]"
                           />
                           <span className="text-xs sm:text-sm font-medium text-[#1C1C1C]">
                           {t("no")}

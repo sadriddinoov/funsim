@@ -156,7 +156,7 @@ const SimReady = () => {
                     <a
                       href="https://t.me/Happytel_support"
                       target="_blank"
-                      className="text-[#F06F1E] text-sm sm:text-lg font-normal cursor-pointer"
+                      className="text-[#FFB800] text-sm sm:text-lg font-normal cursor-pointer"
                     >
                       {t("ready.support")}
                     </a>
@@ -465,7 +465,7 @@ const SimReady = () => {
                     <a
                       href="https://t.me/Happytel_support"
                       target="_blank"
-                      className="text-[#F06F1E] text-sm sm:text-lg font-normal cursor-pointer"
+                      className="text-[#FFB800] text-sm sm:text-lg font-normal cursor-pointer"
                     >
                       {t("ready.support")}
                     </a>

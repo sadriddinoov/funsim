@@ -74,7 +74,7 @@ const Tabs: React.FC = () => {
                 onClick={() => handleTabClick(key as DestinationType)}
                 className={`flex-1 md:flex-initial px-1 py-2 md:px-4 md:py-2 rounded-full text-[13px] md:text-base transition-colors duration-150 ${
                   activeTab === key
-                    ? "bg-[#ff7a00] text-white"
+                    ? "bg-[#FFB800] text-white"
                     : "bg-transparent text-[#1C1C1C]"
                 }`}
               >

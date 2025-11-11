@@ -62,7 +62,7 @@ const Confidential = () => {
                   приложения, доступный на домене{" "}
                   <a
                     href="https://www.happytel.uz"
-                    className="text-[#F06F1E] underline"
+                    className="text-[#FFB800] underline"
                   >
                     https://www.happytel.uz
                   </a>
@@ -74,7 +74,7 @@ const Confidential = () => {
                   автоматизированных информационных систем, доступный по адресу{" "}
                   <a
                     href="https://www.happytel.uz"
-                    className="text-[#F06F1E] underline"
+                    className="text-[#FFB800] underline"
                   >
                     https://www.happytel.uz
                   </a>

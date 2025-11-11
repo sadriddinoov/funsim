@@ -16,8 +16,8 @@ interface ButtonProps {
 }
 
 const variantClasses: Record<ButtonVariant, string> = {
-  usual: "bg-[#F06F1E] text-white",
-  orange: "bg-[#F06F1E1A] text-[#F06F1E]",
+  usual: "bg-[#FFB800] text-white",
+  orange: "bg-[#FFB8001A] text-[#FFB800]",
   gray: "bg-[#5959591A] text-[#595959]",
 };
 

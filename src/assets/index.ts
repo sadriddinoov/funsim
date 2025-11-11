@@ -22,7 +22,7 @@ import visa from "./visa.svg";
 import bgg from "./bgg.svg";
 import bgg2 from "./bgg2.svg";
 import qr from "./svg.svg";
-import logowhite from "./logo.png";
+import logowhite from "./logowhite.png";
 import why1 from "./why1.png";
 import why2 from "./why2.png";
 import why3 from "./why3.png";

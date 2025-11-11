@@ -1,27 +1,30 @@
 "use client";
 
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { ASSETS } from "../assets";
 import Image from "next/image";
 import "../styles/main.css";
 import { Phone, MapPin } from "lucide-react";
 import { APP_ROUTES } from "@/router/path";
+import Link from "next/link";
 
 const Footer = () => {
   const t = useTranslations("");
+  const locale = useLocale();
 
   return (
     <footer className="mt-[30px] pb-[88px]  md:mt-[50px] bg-[#272727] text-[#FFFFFF]">
       <div className="container py-[33px] border-[#00000030] border-t-1  md:flex hidden flex-col ">
         <div className="flex flex-col gap-[50px]">
-          <div className="flex  justify-between">
-            <div>
+          <div className="flex  justify-between items-start">
+            <Link className="p-3 bg-white rounded-lg" href={`/${locale}`}>
               <Image
-                className="w-[200px] h-[50px]"
                 src={ASSETS.logowhite}
-                alt=""
+                alt="logo"
+                className="w-[160px] cursor-pointer"
+                priority
               />
-            </div>
+            </Link>
             <div>
               <div className="flex items-center justify-end gap-[25px]">
                 <a
@@ -147,7 +150,14 @@ const Footer = () => {
         </div>
 
         <div className="flex items-center justify-between w-full">
-          <Image src={ASSETS.logowhite} alt="" className="w-[100px]" />
+           <Link className="p-2 bg-white rounded-lg" href={`/${locale}`}>
+              <Image
+                src={ASSETS.logowhite}
+                alt="logo"
+                className="w-[100px] cursor-pointer"
+                priority
+              />
+            </Link>
 
           <div className="flex items-center gap-[20px]">
             <div className="flex items-center gap-[25px]">
@@ -165,7 +175,11 @@ const Footer = () => {
               >
                 <Image src={ASSETS.facebook} alt="" className="w-8" />
               </a>
-              <a href="https://t.me/Happytel_uz" className="cursor-pointer" target="_blank">
+              <a
+                href="https://t.me/Happytel_uz"
+                className="cursor-pointer"
+                target="_blank"
+              >
                 <Image src={ASSETS.telegram} alt="" className="w-8" />
               </a>
             </div>

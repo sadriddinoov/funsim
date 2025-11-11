@@ -1,11 +1,13 @@
+// src/middleware.ts
 import createMiddleware from "next-intl/middleware";
-import { locales, defaultLocale } from "../next-intl.config";
+import { locales } from "./messages/config";
 
 export default createMiddleware({
   locales,
-  defaultLocale,
+  defaultLocale: "ru",
+  localePrefix: "always",
 });
 
 export const config = {
-  matcher: ["/((?!_next|.*\\..*).*)"],
+  matcher: ["/((?!api|_next|_vercel|.*\\..*).*)"],
 };

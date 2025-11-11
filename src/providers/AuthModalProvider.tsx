@@ -223,7 +223,7 @@ export const AuthModalProvider = ({ children }: { children: ReactNode }) => {
             )}
 
             <button
-              className="w-full mt-6 bg-[#F06F1E] text-white rounded-lg py-2 sm:py-3 hover:bg-[#8F4D26] cursor-pointer transition-colors text-base sm:text-lg"
+              className="w-full mt-6 bg-[#FFB800] text-white rounded-lg py-2 sm:py-3 hover:bg-[#B8860B] cursor-pointer transition-colors text-base sm:text-lg"
               onClick={isVerifyStep ? handleSendCode : handlePayment}
             >
               {isPending || sendCodePending ? `${t("loading")}...` : t("auth.button")}

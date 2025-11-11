@@ -171,7 +171,7 @@ const PackageCard: FC<PackageCardProps> = ({
         {variant === "active" && (
           <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 mt-auto">
             <button
-              className="flex-1 bg-[#F06F1E20] cursor-pointer text-[#F06F1E] py-2 rounded-lg text-sm sm:text-base"
+              className="flex-1 bg-[#FFB80020] cursor-pointer text-[#FFB800] py-2 rounded-lg text-sm sm:text-base"
               onClick={handleCheckBalance} // Use local handler
             >
               {isLoading ? `${t("loading")}...` : t("my.check")}
@@ -187,7 +187,7 @@ const PackageCard: FC<PackageCardProps> = ({
 
         {variant === "balance" && (
           <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 mt-auto">
-            <button className="flex-1  bg-[#F06F1E] text-white py-2 rounded-lg text-sm sm:text-base truncate cursor-pointer">
+            <button className="flex-1  bg-[#FFB800] text-white py-2 rounded-lg text-sm sm:text-base truncate cursor-pointer">
               {isLoading ? `${t("loading")}...` : t("my.ostatok")}
               {balanceData?.balance?.[0]?.subOrderList?.[0]?.remainingTraffic
                 ? (
@@ -227,7 +227,7 @@ const PackageCard: FC<PackageCardProps> = ({
                   {country}
                 </h1>
               </div>
-              <h3 className="text-[14px] font-medium text-[#F06F1E]">
+              <h3 className="text-[14px] font-medium text-[#FFB800]">
                 {price}
               </h3>
             </div>

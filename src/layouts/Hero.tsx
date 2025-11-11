@@ -69,7 +69,7 @@ const Hero = () => {
 
         {/* PHONE */}
         <div className="grid grid-cols-2 md:grid-cols-2 gap-2 mt-[30px] lg:hidden">
-          <div className="group bg-[#282728] hover:bg-[#F06F1E] rounded-[12px] py-[25px] px-[15px] w-full flex flex-col gap-2">
+          <div className="group bg-[#282728] hover:bg-[#FFB800] rounded-[12px] py-[25px] px-[15px] w-full flex flex-col gap-2">
             <h2 className="text-[#FFFFFF] text-start text-[15px]/[15px] font-medium">
               {t("hero.card3_title")}
             </h2>
@@ -78,7 +78,7 @@ const Hero = () => {
             </p>
           </div>
 
-          <div className="group bg-[#282728] hover:bg-[#F06F1E] rounded-[12px] py-[25px] px-[15px] w-full flex flex-col gap-2">
+          <div className="group bg-[#282728] hover:bg-[#FFB800] rounded-[12px] py-[25px] px-[15px] w-full flex flex-col gap-2">
             <h2 className="text-[#FFFFFF] text-start text-[15px]/[15px] font-medium">
               {t("hero.card4_title")}
             </h2>
@@ -90,7 +90,7 @@ const Hero = () => {
           {WhyUSData.map((item, idx) => (
             <div
               key={idx}
-              className="group bg-[#282728] hover:bg-[#F06F1E] rounded-[12px] py-[25px] px-[15px] w-full flex flex-col gap-2"
+              className="group bg-[#282728] hover:bg-[#FFB800] rounded-[12px] py-[25px] px-[15px] w-full flex flex-col gap-2"
             >
               <h2 className="text-[#FFFFFF] text-start text-[15px]/[15px] font-medium">
                 {item.title}

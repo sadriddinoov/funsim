@@ -33,7 +33,7 @@ export const Otzive = ({
             <span
               key={index}
               className={`text-lg md:text-xl ${
-                index < stars ? "text-[#F06F1E]" : "text-[#F06F1E47]"
+                index < stars ? "text-[#FFB800]" : "text-[#FFB80047]"
               }`}
             >
               ★

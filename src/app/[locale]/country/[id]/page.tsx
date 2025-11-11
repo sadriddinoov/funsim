@@ -483,9 +483,9 @@ const Country = () => {
 
             <div
               onClick={() => setIsNoteVisible(!isNoteVisible)}
-              className="md:mt-4  flex cursor-pointer items-start border border-[#F06F1E] gap-2 sm:gap-3 bg-[#F4F4F4] rounded-md md:rounded-xl py-2 sm:py-4 px-3 sm:px-5"
+              className="md:mt-4  flex cursor-pointer items-start border border-[#FFB800] gap-2 sm:gap-3 bg-[#F4F4F4] rounded-md md:rounded-xl py-2 sm:py-4 px-3 sm:px-5"
             >
-              <Info size={24} className="text-[#F06F1E] w-12" />
+              <Info size={24} className="text-[#FFB800] w-12" />
               <p
                 className={`font-normal text-[#1C1C1C] md:block text-[10px] sm:text-base`}
               >
@@ -531,7 +531,7 @@ const Country = () => {
 
                 <button
                   title={t("login.submit")}
-                  className="w-full mt-6 bg-[#F06F1E] text-white rounded-lg py-2 sm:py-3 hover:bg-[#8F4D26] cursor-pointer transition-colors text-base sm:text-lg"
+                  className="w-full mt-6 bg-[#FFB800] text-white rounded-lg py-2 sm:py-3 hover:bg-[#B8860B] cursor-pointer transition-colors text-base sm:text-lg"
                   // onClick={handleLogin}
                 >
                   {t("auth.button")}

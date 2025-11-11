@@ -32,7 +32,7 @@ export default function FAQ({ title, question }: FAQProps) {
           {title}
         </h3>
         {open ? (
-          <Minus className="text-[#F06F1E] shrink-0" size={20} />
+          <Minus className="text-[#FFB800] shrink-0" size={20} />
         ) : (
           <Plus className="text-[#1C1C1C] shrink-0" size={20} />
         )}

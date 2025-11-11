@@ -34,7 +34,7 @@ const Offerta = () => {
               <ul className="list-disc pl-6 space-y-2 text-[#595959] text-sm sm:text-base font-normal">
                 <li>
                   <strong>Happytel</strong> — программно-аппаратный комплекс автоматизированных информационных систем, предоставляемый Совместным предприятием в форме общества с ограниченной ответственностью «PLUG AND PLAY COMMUNICATIONS» (ИНН 306985234) и доступный в сети Интернет по адресу{" "}
-                  <a href="https://www.happytel.uz" className="text-[#F06F1E] underline">https://www.happytel.uz</a> (включая поддомены). Сервис предназначен для обеспечения цифровых услуг связи и сопутствующего сервиса для лиц, выезжающих за рубеж, включая туристов.
+                  <a href="https://www.happytel.uz" className="text-[#FFB800] underline">https://www.happytel.uz</a> (включая поддомены). Сервис предназначен для обеспечения цифровых услуг связи и сопутствующего сервиса для лиц, выезжающих за рубеж, включая туристов.
                 </li>
                 <li>
                   <strong>Программное обеспечение Happytel</strong> — любое программное обеспечение, распространяемое под брендом Happytel, включая, но не ограничиваясь, программами для интернет-коммуникаций, мобильными и веб-приложениями.
@@ -47,7 +47,7 @@ const Offerta = () => {
                 </li>
                 <li>
                   <strong>Веб-сайт Happytel</strong> — официальный сайт Исполнителя, размещённый по адресу{" "}
-                  <a href="https://www.happytel.uz" className="text-[#F06F1E] underline">https://www.happytel.uz</a>.
+                  <a href="https://www.happytel.uz" className="text-[#FFB800] underline">https://www.happytel.uz</a>.
                 </li>
                 <li>
                   <strong>Пользователь</strong> — физическое лицо, обладающее полной дееспособностью и достигшее совершеннолетия, зарегистрировавшееся на платформе Happytel, создавшее учётную запись и акцептовавшее настоящую Оферту.
