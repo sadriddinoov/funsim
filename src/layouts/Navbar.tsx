@@ -26,7 +26,7 @@ export default function Navbar() {
   const currentLang = languages.find((l) => l.code === locale) ?? languages[0];
 
   const changeLanguage = (newLocale: string) => {
-    let segments = pathname.split("/").filter(Boolean);
+    const segments = pathname.split("/").filter(Boolean);
     if (segments[0] && SUPPORTED_LOCALES.includes(segments[0] as any)) {
       segments.shift();
     }
