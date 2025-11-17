@@ -34,20 +34,21 @@ import bggsmth from "./bgg.png";
 import grey from "./Subtract.png";
 import bycard from "./bycard.png";
 import noImage from "./noImage.jpg";
-import phonee1 from './phonee1.png'
-import phonee2 from './phonee2.png'
-import footer1 from './footer1.svg'
-import footer2 from './footer2.svg'
-import footer3 from './footer3.svg'
-import footer4 from './footer4.svg'
-import payment1 from './payment1.png'
-import payment2 from './payment2.png'
-import payment3 from './payment3.svg'
-import payment4 from './payment4.svg'
-import internet from './internet.svg'
-import calls from './calls.svg'
-import sms from './sms.svg'
-import fiveg from './5g.svg'
+import phonee1 from "./phonee1.png";
+import phonee2 from "./phonee2.png";
+import footer1 from "./footer1.svg";
+import footer2 from "./footer2.svg";
+import footer3 from "./footer3.svg";
+import footer4 from "./footer4.svg";
+import payment1 from "./payment1.png";
+import payment2 from "./payment2.png";
+import payment3 from "./payment3.svg";
+import payment4 from "./payment4.svg";
+import internet from "./internet.svg";
+import calls from "./calls.svg";
+import sms from "./sms.svg";
+import fiveg from "./5g.svg";
+import kaspi from "./kaspi.png";
 
 export const ASSETS = {
   internet,
@@ -99,5 +100,6 @@ export const ASSETS = {
   payment1,
   payment2,
   payment3,
-  payment4
+  payment4,
+  kaspi,
 };

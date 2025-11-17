@@ -54,28 +54,28 @@ const mockPaymentData = {
   data: [
     {
       id: 1,
-      name: "Click",
-      key: "click",
-      image: ASSETS.click,
+      name: "Kaspi",
+      key: "kaspi",
+      image: ASSETS.kaspi,
     },
-    {
-      id: 2,
-      name: "Payme",
-      key: "payme",
-      image: ASSETS.payme,
-    },
-    {
-      id: 3,
-      name: "Visa + Mastercard",
-      key: "visa",
-      image: ASSETS.visa,
-    },
-    {
-      id: 4,
-      name: "Uzcard + Humo",
-      key: "uzcard",
-      image: ASSETS.bycard,
-    },
+    // {
+    //   id: 2,
+    //   name: "Payme",
+    //   key: "payme",
+    //   image: ASSETS.payme,
+    // },
+    // {
+    //   id: 3,
+    //   name: "Visa + Mastercard",
+    //   key: "visa",
+    //   image: ASSETS.visa,
+    // },
+    // {
+    //   id: 4,
+    //   name: "Uzcard + Humo",
+    //   key: "uzcard",
+    //   image: ASSETS.bycard,
+    // },
   ],
 };
 
@@ -494,10 +494,13 @@ const ConfirmPage = () => {
                     </div>
                   </div>
 
-                  {profileData?.data?.balance > 0.00 && (
+                  {profileData?.data?.balance > 0.0 && (
                     <div className="flex items-center justify-center gap-2 sm:gap-3 mt-2 sm:mt-4">
                       <p className="text-xs sm:text-sm font-medium text-[#1C1C1C] flex gap-1">
-                        {t("auth.use")} {" "} <p className="font-semibold">{profileData?.data?.balance}</p>
+                        {t("auth.use")}{" "}
+                        <p className="font-semibold">
+                          {profileData?.data?.balance}
+                        </p>
                       </p>
                       <div className="flex items-center gap-2 sm:gap-3">
                         <label className="flex items-center gap-1 cursor-pointer">
@@ -521,7 +524,7 @@ const ConfirmPage = () => {
                             className="w-4 h-4 sm:w-5 sm:h-5 rounded-full border-2 bg-white text-[#FFB800]"
                           />
                           <span className="text-xs sm:text-sm font-medium text-[#1C1C1C]">
-                          {t("no")}
+                            {t("no")}
                           </span>
                         </label>
                       </div>
