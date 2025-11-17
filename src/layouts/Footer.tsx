@@ -30,20 +30,20 @@ const Footer = () => {
                 <a
                   target="_blank"
                   className="cursor-pointer"
-                  href="https://www.instagram.com/happytel.uz?igsh=MThhNzVmMXI2Z29tbA=="
+                  href="https://www.instagram.com/funsim.kz/"
                 >
                   <Image src={ASSETS.instagram} alt="" className="w-10" />
                 </a>
                 <a
                   target="_blank"
-                  href="https://m.facebook.com/@happytel.uz/?wtsid=rdr_04kOHJKn17HG3Ml5A&hr=1"
+                  href="https://wa.me/7007760707"
                   className="cursor-pointer"
                 >
                   <Image src={ASSETS.facebook} alt="" className="w-10" />
                 </a>
                 <a
                   target="_blank"
-                  href="https://t.me/Happytel_uz"
+                  href="https://t.me/funsimkz"
                   className="cursor-pointer"
                 >
                   <Image src={ASSETS.telegram} alt="" className="w-10" />
@@ -69,12 +69,12 @@ const Footer = () => {
             <div>
               <div className="flex flex-col gap-[10px]">
                 <a
-                  href="tel:+99895 680 20 20"
+                  href="tel:+7 (700) 776 07 07"
                   className="flex items-center gap-2"
                 >
                   <Phone width={20} color={"#ffffff80"} />
                   <p className="text-[#FFFFFF] font-normal text-[16px]">
-                    +99895 680 20 20
+                    +7 (700) 776 07 07
                   </p>
                 </a>
 
@@ -117,10 +117,10 @@ const Footer = () => {
       <div className="container justify-center pt-[33px] border-[#00000030] border-t-1  md:hidden flex flex-col gap-[30px]">
         <div className="flex justify-between gap-[20px]">
           <div className="flex flex-col gap-[20px]">
-            <a href="tel:+99895 680 20 20" className="flex items-center gap-2">
+            <a href="tel:+795 680 20 20" className="flex items-center gap-2">
               <Phone width={16} color={"#ffffff80"} />
               <p className="text-[#FFFFFF] font-normal text-[12px]">
-                +99895 680 20 20
+                +795 680 20 20
               </p>
             </a>
 
@@ -164,19 +164,19 @@ const Footer = () => {
               <a
                 className="cursor-pointer"
                 target="_blank"
-                href="https://www.instagram.com/happytel.uz?igsh=MThhNzVmMXI2Z29tbA=="
+                href="https://www.instagram.com/funsim.kz/"
               >
                 <Image src={ASSETS.instagram} alt="" className="w-8" />
               </a>
               <a
                 target="_blank"
-                href="https://m.facebook.com/@happytel.uz/?wtsid=rdr_04kOHJKn17HG3Ml5A&hr=1"
+                href="https://wa.me/7007760707"
                 className="cursor-pointer"
               >
                 <Image src={ASSETS.facebook} alt="" className="w-8" />
               </a>
               <a
-                href="https://t.me/Happytel_uz"
+                href="https://t.me/funsimkz"
                 className="cursor-pointer"
                 target="_blank"
               >

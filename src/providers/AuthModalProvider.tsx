@@ -24,11 +24,12 @@ export const AuthModalProvider = ({ children }: { children: ReactNode }) => {
   const t = useTranslations();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalPhone, setModalPhone] = useState<string>("");
+  const [phone, setPhone] = useState<string>(""); // вместо any
+
 
   const cleanedPhone = modalPhone.replace(/\s/g, "");
   const [code, setCode] = useState<string>("");
   const [isVerifyStep, setIsVerifyStep] = useState(false);
-  const [phone, setPhone] = useState<any>();
   const [newCode, setNewCode] = useState<any>();
 
   const openAuthModal = () => {
@@ -43,24 +44,48 @@ export const AuthModalProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const handleModalPhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let value = e.target.value.replace(/\D/g, "");
-    setPhone(value);
-    if (value.startsWith("998")) {
-      value = value.substring(3);
+    // только цифры
+    let digits = e.target.value.replace(/\D/g, "");
+
+    // digits сейчас могут быть вида "7XXXXXXXXXX" или "XXXXXXXXXX"
+
+    // убираем ведущую 7, чтобы внутри всегда было ровно 10 локальных цифр
+    if (digits.startsWith("7")) {
+      digits = digits.slice(1);
     }
-    if (value.length > 9) value = value.substring(0, 9);
-    if (value.length > 0) {
-      const formatted = `${value.substring(0, 2)} ${value.substring(
-        2,
-        5
-      )} ${value.substring(5, 7)} ${value.substring(7, 9)}`.trim();
-      e.target.value = formatted;
-      setModalPhone(formatted);
-    } else {
-      e.target.value = "";
+
+    // максимум 10 цифр (XXX XXX XX XX)
+    if (digits.length > 10) {
+      digits = digits.slice(0, 10);
+    }
+
+    // если вообще ничего нет — очищаем
+    if (digits.length === 0) {
       setModalPhone("");
+      setPhone("");
+      return;
     }
+
+    // форматируем локальную часть: XXX XXX XX XX
+    let local = digits.slice(0, 3);
+    if (digits.length > 3) {
+      local += " " + digits.slice(3, 6);
+    }
+    if (digits.length > 6) {
+      local += " " + digits.slice(6, 8);
+    }
+    if (digits.length > 8) {
+      local += " " + digits.slice(8, 10);
+    }
+
+    // то, что показываем в инпуте (без прямого изменения e.target.value!)
+    setModalPhone(local);
+
+    // то, что отправляем на бэкенд — цифры с кодом страны (77XXXXXXXX)
+    setPhone("7" + digits);
   };
+
+
   const handleCodeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let value = e.target.value.replace(/\D/g, ""); // faqat raqamlarni oladi
 
@@ -200,11 +225,12 @@ export const AuthModalProvider = ({ children }: { children: ReactNode }) => {
               </p>
               <input
                 type="tel"
-                value={`+998 ${modalPhone}`}
+                value={modalPhone ? `+7 ${modalPhone}` : ""} // если пусто — реально пустая строка
                 onChange={handleModalPhoneChange}
                 className="w-full bg-[#CFCFCF1F] px-4 py-2 text-[#1C1C1C] rounded-lg focus:outline-none text-base sm:text-lg"
-                placeholder="+998 99 999 99 99"
+                placeholder="+7 999 999 99 99"
               />
+  
             </div>
 
             {isVerifyStep && (

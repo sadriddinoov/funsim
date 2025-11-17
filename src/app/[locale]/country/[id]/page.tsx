@@ -94,7 +94,7 @@ const Country = () => {
   const [selectedItem, setSelectedItem] = useState<any>(null);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [phone, setPhone] = useState("+998");
+  const [phone, setPhone] = useState<string>("");
 
   const [code, setCode] = useState("");
 
@@ -157,7 +157,7 @@ const Country = () => {
   //     setIsAuthenticated(true);
   //     setIsModalOpen(false);
   //     setIsVerifyStep(false);
-  //     setPhone("+998");
+  //     setPhone("+7");
   //     setCode("");
   //     if (selectedPackage !== null) {
   //       const selectedItem = data[selectedPackage];

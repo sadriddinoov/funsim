@@ -295,10 +295,10 @@ const SimReady = () => {
                     {t("ready.phonenum")}
                   </p>
                   <a
-                    href="tel:+998956802020"
+                    href="tel:+7956802020"
                     className="text-sm sm:text-base font-normal bg-[#000000c8] text-white p-2 py-1 rounded-md hover:bg-[#3a3a3a] transition-colors duration-200"
                   >
-                    +99895 680 20 20
+                    +795 680 20 20
                   </a>
                 </div>
 
@@ -486,10 +486,10 @@ const SimReady = () => {
                   {t("ready.phonenum")}
                 </p>
                 <a
-                  href="tel:+998956802020"
+                  href="tel:+7956802020"
                   className="text-sm sm:text-base font-normal bg-[#000000c8] text-white p-2 py-1 rounded-md hover:bg-[#3a3a3a] transition-colors duration-200 truncate"
                 >
-                  +99895 680 20 20
+                  +795 680 20 20
                 </a>
               </div>
 

@@ -104,7 +104,7 @@ const Profile = () => {
     }
     if (value.length > 9) value = value.substring(0, 9);
     if (value.length > 0) {
-      const formatted = `+998 ${value.substring(0, 2)} ${value.substring(
+      const formatted = `+7 ${value.substring(0, 2)} ${value.substring(
         2,
         5
       )} ${value.substring(5, 7)} ${value.substring(7, 9)}`.trim();
@@ -212,7 +212,7 @@ const Profile = () => {
                       type="tel"
                       placeholder={t("ready.phonenum")}
                       value={
-                        modalPhone || `+${profileData?.data?.phone}` || "+998 "
+                        modalPhone || `+${profileData?.data?.phone}` || "+7 "
                       }
                       onChange={handleModalPhoneChange}
                       className="w-full p-3 rounded-lg bg-white focus:outline-none focus:ring-0 focus:border-transparent text-black"

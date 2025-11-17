@@ -117,23 +117,44 @@ const ConfirmPage = () => {
   };
 
   const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let value = e.target.value.replace(/\D/g, "");
-    if (value.startsWith("998")) {
-      value = value.substring(3);
+    let digits = e.target.value.replace(/\D/g, ""); // только цифры
+
+    // если пользователь набрал ведущую 7, убираем её,
+    // чтобы хранить только 10 цифр после +7
+    if (digits.startsWith("7")) {
+      digits = digits.slice(1);
     }
-    if (value.length > 9) value = value.substring(0, 9);
-    if (value.length > 0) {
-      const formatted = `+998 ${value.substring(0, 2)} ${value.substring(
-        2,
-        5
-      )} ${value.substring(5, 7)} ${value.substring(7, 9)}`.trim();
-      e.target.value = formatted;
-      setPhone(formatted);
-    } else {
-      e.target.value = "";
+
+    // максимум 10 цифр (XXX XXX XX XX)
+    if (digits.length > 10) {
+      digits = digits.slice(0, 10);
+    }
+
+    // если вообще ничего не осталось — очищаем поле
+    if (digits.length === 0) {
       setPhone("");
+      return;
     }
+
+    // Форматируем: +7 XXX XXX XX XX
+    let formatted = "+7";
+
+    if (digits.length > 0) {
+      formatted += " " + digits.slice(0, 3);
+    }
+    if (digits.length >= 4) {
+      formatted += " " + digits.slice(3, 6);
+    }
+    if (digits.length >= 7) {
+      formatted += " " + digits.slice(6, 8);
+    }
+    if (digits.length >= 9) {
+      formatted += " " + digits.slice(8, 10);
+    }
+
+    setPhone(formatted);
   };
+
 
   const { data: paymentData } = useQuery({
     queryKey: ["payment"],
@@ -382,11 +403,12 @@ const ConfirmPage = () => {
                     <input
                       ref={phoneRef}
                       type="text"
-                      placeholder="+998 99 999 99 99"
+                      placeholder="+7 999 999 99 99"
                       className="w-full bg-white p-2 text-black rounded-lg focus:outline-none focus:ring-0 focus:border-transparent"
-                      value={phone || "+998 "}
+                      value={phone}
                       onChange={handlePhoneChange}
                     />
+
                   </div>
 
                   <div className="w-full">
@@ -438,11 +460,10 @@ const ConfirmPage = () => {
                     {mockPaymentData?.data?.map((item: any) => (
                       <div
                         key={item?.id}
-                        className={`w-full h-[60px] md:h-[85px] flex items-center justify-center bg-white rounded-[12px] cursor-pointer ${
-                          selectedMethod === item?.id
-                            ? "border border-[#FFB800]"
-                            : "border border-transparent"
-                        }`}
+                        className={`w-full h-[60px] md:h-[85px] flex items-center justify-center bg-white rounded-[12px] cursor-pointer ${selectedMethod === item?.id
+                          ? "border border-[#FFB800]"
+                          : "border border-transparent"
+                          }`}
                         onClick={() => {
                           setSelectedMethodName(item);
                           setSelectedMethod(item?.id);
@@ -451,11 +472,10 @@ const ConfirmPage = () => {
                         <Image
                           alt=""
                           src={item?.image}
-                          className={`md:w-24 md:h-auto h-14 w-[120px] object-contain ${
-                            item?.name === "click" || item?.name === "payme"
-                              ? "h-30 w-30"
-                              : ""
-                          }`}
+                          className={`md:w-24 md:h-auto h-14 w-[120px] object-contain ${item?.name === "click" || item?.name === "payme"
+                            ? "h-30 w-30"
+                            : ""
+                            }`}
                         />
                       </div>
                     ))}
