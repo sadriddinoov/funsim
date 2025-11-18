@@ -420,7 +420,7 @@ const Country = () => {
               {plansData?.data?.data?.filter(
                 (item: any) => !(item?.b2b === 1 || item?.hide_site === true)
               ).length === 0 && (
-                <p className="text-black text-center">Hech nima topilmadi !</p>
+                <p className="text-black text-center">Ничего не нашлось</p>
               )}
             </div>
             <div

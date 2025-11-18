@@ -285,7 +285,7 @@ const Profile = () => {
                     />
                   </div>
                   <h1 className="text-[30px] md:text-[35px] font-bold mt-4">
-                    {profileData?.data?.balance} UZS
+                    {profileData?.data?.balance} KZT
                   </h1>
                   <p className="text-xs md:text-[14px] mt-auto">
                     {t("ready.orders")}: {profileData?.data?.total_orders ?? 0}

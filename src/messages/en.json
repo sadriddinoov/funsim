@@ -13,8 +13,8 @@
     "title": "Plans"
   },
   "payment": {
-    "click": "We’ve sent a notification to the Click app. Please complete the payment",
-    "payme": "We’ve sent a notification to the Payme app. Please complete the payment",
+    "click": "We’ve sent a notification to the app. Please complete the payment",
+    "payme": "We’ve sent a notification to the app. Please complete the payment",
     "other": "We’ve sent a notification to the app. Please complete the payment"
   },
   "hero": {

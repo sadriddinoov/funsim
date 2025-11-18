@@ -85,12 +85,6 @@ const Footer = () => {
                   </p>
                 </a>
               </div>
-              <div className="flex items-center gap-[15px] mt-[30px]">
-                <Image className="w-22" src={ASSETS.payment1} alt="" />
-                <Image className="w-22" src={ASSETS.payment2} alt="" />
-                <Image className="w-22" src={ASSETS.payment3} alt="" />
-                <Image className="w-22" src={ASSETS.payment4} alt="" />
-              </div>
             </div>
 
             <div className="flex flex-col gap-[25px] mb-[22px]">

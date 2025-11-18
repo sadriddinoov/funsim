@@ -1,2 +1,2 @@
-export const API_URL = "https://api.happytel.uz/api";
-export const API_IMAGE = "https://api.happytel.uz/storage/";
+export const API_URL = "https://api.funsim.kz/api";
+export const API_IMAGE = "https://api.funsim.kz/storage/";

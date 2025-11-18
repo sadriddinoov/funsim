@@ -58,26 +58,40 @@ const mockPaymentData = {
       key: "kaspi",
       image: ASSETS.kaspi,
     },
-    // {
-    //   id: 2,
-    //   name: "Payme",
-    //   key: "payme",
-    //   image: ASSETS.payme,
-    // },
-    // {
-    //   id: 3,
-    //   name: "Visa + Mastercard",
-    //   key: "visa",
-    //   image: ASSETS.visa,
-    // },
-    // {
-    //   id: 4,
-    //   name: "Uzcard + Humo",
-    //   key: "uzcard",
-    //   image: ASSETS.bycard,
-    // },
   ],
 };
+
+/**
+ * Нормализация телефона под KZ-формат для API:
+ * - убираем всё, кроме цифр
+ * - срезаем возможный 998 (узбекский код)
+ * - приводим к виду 7XXXXXXXXXX (11 цифр, начинается с 7)
+ */
+function normalizeKzPhone(raw?: string | null): string {
+  let digits = (raw || "").replace(/\D/g, "");
+
+  // если прилетело 998XXXXXXXXX – убираем 998
+  if (digits.startsWith("998")) {
+    digits = digits.slice(3);
+  }
+
+  // если 10 цифр – добавляем ведущую 7
+  if (digits.length === 10) {
+    digits = "7" + digits;
+  }
+
+  // если 11 цифр и начинается с 8 – меняем на 7
+  if (digits.length === 11 && digits.startsWith("8")) {
+    digits = "7" + digits.slice(1);
+  }
+
+  // если вдруг больше 11 — обрежем
+  if (digits.length > 11) {
+    digits = digits.slice(0, 11);
+  }
+
+  return digits;
+}
 
 const ConfirmPage = () => {
   const t = useTranslations();
@@ -91,9 +105,9 @@ const ConfirmPage = () => {
     null
   );
   const [passportFile, setPassportFile] = useState<File | null>(null);
-  const [orderData, setOrderData] = useState(null);
+  const [orderData, setOrderData] = useState<any>(null);
   const [object, setObject] = useState<any>(null);
-  const [phone, setPhone] = useState<string>();
+  const [phone, setPhone] = useState<string>(""); // 👈 сделал по умолчанию пустую строку
   const [fio, setFio] = useState<string>();
   const [showOrderModal, setShowOrderModal] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
@@ -154,7 +168,6 @@ const ConfirmPage = () => {
 
     setPhone(formatted);
   };
-
 
   const { data: paymentData } = useQuery({
     queryKey: ["payment"],
@@ -236,10 +249,17 @@ const ConfirmPage = () => {
       return;
     }
 
+    const normalizedPhone = normalizeKzPhone(phone);
+
+    console.log("========== ORDER CREATE ==========");
+    console.log("📞 Введённый номер (input):", phone);
+    console.log("🇰🇿 Номер для API (KZ формат):", normalizedPhone);
+    console.log("==================================");
+
     mutate({
       plan_id: id,
       fio,
-      phone,
+      phone: normalizedPhone, // 👈 в API уходит KZ-формат
       payment_type: selectedMethodName?.key,
       passport_image: passportFile,
       use_cashback: AgreeToKeshback,
@@ -275,9 +295,15 @@ const ConfirmPage = () => {
   const handleAuth = () => {
     const token = localStorage.getItem("token");
     const phoneNumber = phoneRef.current?.value || "";
-    const formatted = phoneNumber.replace(/\D/g, "");
+    const normalizedPhone = normalizeKzPhone(phoneNumber);
+
+    console.log("============= AUTH =============");
+    console.log("📞 Введённый номер (input):", phoneNumber);
+    console.log("🇰🇿 Номер для API (KZ формат):", normalizedPhone);
+    console.log("================================");
+
     authMutate({
-      phone: formatted,
+      phone: normalizedPhone,
       order_id: String(orderData?.order_id),
       secret: token,
     });
@@ -408,7 +434,6 @@ const ConfirmPage = () => {
                       value={phone}
                       onChange={handlePhoneChange}
                     />
-
                   </div>
 
                   <div className="w-full">
@@ -460,10 +485,11 @@ const ConfirmPage = () => {
                     {mockPaymentData?.data?.map((item: any) => (
                       <div
                         key={item?.id}
-                        className={`w-full h-[60px] md:h-[85px] flex items-center justify-center bg-white rounded-[12px] cursor-pointer ${selectedMethod === item?.id
-                          ? "border border-[#FFB800]"
-                          : "border border-transparent"
-                          }`}
+                        className={`w-full h-[60px] md:h-[85px] flex items-center justify-center bg-white rounded-[12px] cursor-pointer ${
+                          selectedMethod === item?.id
+                            ? "border border-[#FFB800]"
+                            : "border border-transparent"
+                        }`}
                         onClick={() => {
                           setSelectedMethodName(item);
                           setSelectedMethod(item?.id);
@@ -472,10 +498,11 @@ const ConfirmPage = () => {
                         <Image
                           alt=""
                           src={item?.image}
-                          className={`md:w-24 md:h-auto h-14 w-[120px] object-contain ${item?.name === "click" || item?.name === "payme"
-                            ? "h-30 w-30"
-                            : ""
-                            }`}
+                          className={`md:w-24 md:h-auto h-14 w-[120px] object-contain ${
+                            item?.name === "click" || item?.name === "payme"
+                              ? "h-30 w-30"
+                              : ""
+                          }`}
                         />
                       </div>
                     ))}
