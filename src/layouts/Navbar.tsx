@@ -18,9 +18,9 @@ export default function Navbar() {
   const router = useRouter();
 
   const languages = [
-    { code: "kaz", label: "Kaz" },
-    { code: "ru", label: "Ру" },
-    { code: "en", label: "En" },
+    { code: "kaz", label: "Қаз" },
+    { code: "ru", label: "Рус" },
+    { code: "en", label: "Eng" },
   ] as const;
 
   const currentLang = languages.find((l) => l.code === locale) ?? languages[0];

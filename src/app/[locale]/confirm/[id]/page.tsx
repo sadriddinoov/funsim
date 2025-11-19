@@ -2,9 +2,9 @@
 
 import { FooterNav } from "@/layouts/FooterNav";
 import Navbar from "@/layouts/Navbar";
-import { ArrowLeft, Download } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { ASSETS } from "@/assets";
 import PackageCard from "@/components/packageCard";
@@ -42,10 +42,6 @@ async function fetchProfile() {
     },
   });
 
-  // if (res.status === 401) {
-  //   toast.error("Сессия истекла, пожалуйста заполните форму");
-  // }
-
   if (!res.ok) throw new Error("Failed to fetch profile");
   return res.json();
 }
@@ -65,27 +61,27 @@ const mockPaymentData = {
  * Нормализация телефона под KZ-формат для API:
  * - убираем всё, кроме цифр
  * - срезаем возможный 998 (узбекский код)
- * - приводим к виду 7XXXXXXXXXX (11 цифр, начинается с 7)
+ * - если 10 цифр — добавляем ведущую 7 => 7XXXXXXXXXX
+ * - если 11 цифр и начинается с 8 — меняем на 7XXXXXXXXXX
  */
 function normalizeKzPhone(raw?: string | null): string {
   let digits = (raw || "").replace(/\D/g, "");
 
-  // если прилетело 998XXXXXXXXX – убираем 998
+  // 998XXXXXXXXX -> убираем 998
   if (digits.startsWith("998")) {
     digits = digits.slice(3);
   }
 
-  // если 10 цифр – добавляем ведущую 7
+  // если 10 цифр -> добавляем 7 в начало
   if (digits.length === 10) {
     digits = "7" + digits;
   }
 
-  // если 11 цифр и начинается с 8 – меняем на 7
+  // если 11 цифр и начинается с 8 -> заменяем 8 на 7
   if (digits.length === 11 && digits.startsWith("8")) {
     digits = "7" + digits.slice(1);
   }
 
-  // если вдруг больше 11 — обрежем
   if (digits.length > 11) {
     digits = digits.slice(0, 11);
   }
@@ -93,21 +89,53 @@ function normalizeKzPhone(raw?: string | null): string {
   return digits;
 }
 
+/** Форматирование для отображения в инпуте: +7 XXX XXX XX XX */
+function formatKzPhoneDisplay(digits: string): string {
+  if (!digits) return "+7 ";
+
+  let result = "+7 ";
+
+  if (digits.length <= 3) {
+    return result + digits;
+  }
+
+  result += digits.slice(0, 3); // XXX
+
+  if (digits.length <= 6) {
+    return result + " " + digits.slice(3); // XXX XXX
+  }
+
+  result += " " + digits.slice(3, 6); // +7 XXX XXX
+
+  if (digits.length <= 8) {
+    return result + " " + digits.slice(6); // +7 XXX XXX XX
+  }
+
+  result += " " + digits.slice(6, 8); // +7 XXX XXX XX
+
+  if (digits.length <= 10) {
+    return result + " " + digits.slice(8); // +7 XXX XXX XX XX
+  }
+
+  return result;
+}
+
 const ConfirmPage = () => {
   const t = useTranslations();
   const router = useRouter();
-
   const { id } = useParams<{ id: string }>();
 
-  const [fileName, setFileName] = useState<string | null>(null);
-  const [selectedMethod, setSelectedMethod] = useState<number | null>(null);
-  const [selectedMethodName, setSelectedMethodName] = useState<any | null>(
-    null
+  // 🟡 Kaspi выбран дефолтно
+  const [selectedMethod, setSelectedMethod] = useState<number | null>(
+    mockPaymentData.data[0]?.id ?? null
   );
-  const [passportFile, setPassportFile] = useState<File | null>(null);
+  const [selectedMethodName, setSelectedMethodName] = useState<any | null>(
+    mockPaymentData.data[0] ?? null
+  );
+
   const [orderData, setOrderData] = useState<any>(null);
   const [object, setObject] = useState<any>(null);
-  const [phone, setPhone] = useState<string>(""); // 👈 сделал по умолчанию пустую строку
+  const [phoneDigits, setPhoneDigits] = useState<string>(""); // только 10 цифр после +7
   const [fio, setFio] = useState<string>();
   const [showOrderModal, setShowOrderModal] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
@@ -115,58 +143,28 @@ const ConfirmPage = () => {
   const [agreeToPolicy, setAgreeToPolicy] = useState(false);
   const [AgreeToKeshback, setAgreeToKeshback] = useState(false);
 
-  const phoneRef = useRef<HTMLInputElement>(null);
-
   useEffect(() => {
     const saved = localStorage.getItem("obyekt");
     setObject(saved ? JSON.parse(saved) : null);
   }, []);
 
-  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (file) {
-      setFileName(file.name);
-      setPassportFile(file);
-    }
-  };
-
   const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let digits = e.target.value.replace(/\D/g, ""); // только цифры
+    const value = e.target.value;
 
-    // если пользователь набрал ведущую 7, убираем её,
-    // чтобы хранить только 10 цифр после +7
+    // все цифры из инпута (включая 7 из "+7")
+    let digits = value.replace(/\D/g, "");
+
+    // первый символ — страна (+7), убираем его, остаются только цифры абонента
     if (digits.startsWith("7")) {
       digits = digits.slice(1);
     }
 
-    // максимум 10 цифр (XXX XXX XX XX)
+    // максимум 10 цифр
     if (digits.length > 10) {
       digits = digits.slice(0, 10);
     }
 
-    // если вообще ничего не осталось — очищаем поле
-    if (digits.length === 0) {
-      setPhone("");
-      return;
-    }
-
-    // Форматируем: +7 XXX XXX XX XX
-    let formatted = "+7";
-
-    if (digits.length > 0) {
-      formatted += " " + digits.slice(0, 3);
-    }
-    if (digits.length >= 4) {
-      formatted += " " + digits.slice(3, 6);
-    }
-    if (digits.length >= 7) {
-      formatted += " " + digits.slice(6, 8);
-    }
-    if (digits.length >= 9) {
-      formatted += " " + digits.slice(8, 10);
-    }
-
-    setPhone(formatted);
+    setPhoneDigits(digits);
   };
 
   const { data: paymentData } = useQuery({
@@ -187,10 +185,6 @@ const ConfirmPage = () => {
       formData.append("phone", data.phone);
       formData.append("payment_type", data.payment_type);
 
-      if (data.passport) formData.append("passport", data.passport);
-      if (data.passport_image)
-        formData.append("passport_image", data.passport_image);
-
       const res = await fetch(`${API_URL}/${endpoints.orderCreate}`, {
         method: "POST",
         body: formData,
@@ -210,7 +204,7 @@ const ConfirmPage = () => {
         selectedMethodName?.key === "visa"
       ) {
         if (res?.payment_details) {
-          window.location.href = res.payment_details.payment_url; // Redirect in same tab
+          window.location.href = res.payment_details.payment_url;
         }
       }
 
@@ -230,7 +224,7 @@ const ConfirmPage = () => {
 
       setShowOrderModal(true);
     },
-    onError: (err) => {
+    onError: (err: any) => {
       toast.error(err?.message);
     },
   });
@@ -240,7 +234,7 @@ const ConfirmPage = () => {
       toast.error("Исмни киритинг!");
       return;
     }
-    if (!phone || phone.trim() === "") {
+    if (phoneDigits.length !== 10) {
       toast.error("Телефон рақамини киритинг!");
       return;
     }
@@ -249,19 +243,18 @@ const ConfirmPage = () => {
       return;
     }
 
-    const normalizedPhone = normalizeKzPhone(phone);
+    const normalizedPhone = normalizeKzPhone(phoneDigits);
 
     console.log("========== ORDER CREATE ==========");
-    console.log("📞 Введённый номер (input):", phone);
+    console.log("📞 Введённый номер (input):", formatKzPhoneDisplay(phoneDigits));
     console.log("🇰🇿 Номер для API (KZ формат):", normalizedPhone);
     console.log("==================================");
 
     mutate({
       plan_id: id,
       fio,
-      phone: normalizedPhone, // 👈 в API уходит KZ-формат
+      phone: normalizedPhone,
       payment_type: selectedMethodName?.key,
-      passport_image: passportFile,
       use_cashback: AgreeToKeshback,
     });
   };
@@ -287,18 +280,17 @@ const ConfirmPage = () => {
       setToken(res?.data?.token);
       await router.push("/simDone");
     },
-    onError: (err) => {
+    onError: (err: any) => {
       toast.error(err?.message);
     },
   });
 
   const handleAuth = () => {
     const token = localStorage.getItem("token");
-    const phoneNumber = phoneRef.current?.value || "";
-    const normalizedPhone = normalizeKzPhone(phoneNumber);
+    const normalizedPhone = normalizeKzPhone(phoneDigits);
 
     console.log("============= AUTH =============");
-    console.log("📞 Введённый номер (input):", phoneNumber);
+    console.log("📞 Введённый номер (input):", formatKzPhoneDisplay(phoneDigits));
     console.log("🇰🇿 Номер для API (KZ формат):", normalizedPhone);
     console.log("================================");
 
@@ -340,7 +332,12 @@ const ConfirmPage = () => {
   useEffect(() => {
     if (profileData?.data) {
       if (profileData.data.phone) {
-        setPhone(profileData.data.phone);
+        const normalized = normalizeKzPhone(profileData.data.phone);
+        const subscriber =
+          normalized.length === 11 && normalized.startsWith("7")
+            ? normalized.slice(1)
+            : normalized;
+        setPhoneDigits(subscriber);
       }
       if (profileData.data.full_name) {
         setFio(profileData.data.full_name);
@@ -427,53 +424,13 @@ const ConfirmPage = () => {
                       {t("auth.phone")}*
                     </p>
                     <input
-                      ref={phoneRef}
                       type="text"
-                      placeholder="+7 999 999 99 99"
+                      // placeholder убираем, всегда показываем +7 ...
+                      placeholder=""
                       className="w-full bg-white p-2 text-black rounded-lg focus:outline-none focus:ring-0 focus:border-transparent"
-                      value={phone}
+                      value={formatKzPhoneDisplay(phoneDigits)}
                       onChange={handlePhoneChange}
                     />
-                  </div>
-
-                  <div className="w-full">
-                    <p className="text-sm mb-2 text-[#595959]">
-                      {t("auth.passport")}*
-                    </p>
-
-                    <div className="relative">
-                      {profileData?.data?.passport_image ? (
-                        <>
-                          <div className="relative w-full">
-                            <img
-                              src={`${API_IMAGE}/${profileData?.data?.passport_image}`}
-                              alt="passport"
-                              className="w-full max-h-40 object-contain border rounded-lg"
-                            />
-                            <input
-                              type="file"
-                              className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-                              onChange={handleFileUpload}
-                            />
-                          </div>
-                          <Download className="absolute bottom-0 right-2 text-white bg-black rounded-full p-1" />
-                        </>
-                      ) : (
-                        <div className="relative">
-                          <input
-                            type="text"
-                            className="w-full bg-white p-2 text-[#FFB800] rounded-lg"
-                            value={fileName || "Загрузить"}
-                            readOnly
-                          />
-                          <input
-                            type="file"
-                            className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-                            onChange={handleFileUpload}
-                          />
-                        </div>
-                      )}
-                    </div>
                   </div>
                 </div>
 
@@ -545,9 +502,9 @@ const ConfirmPage = () => {
                     <div className="flex items-center justify-center gap-2 sm:gap-3 mt-2 sm:mt-4">
                       <p className="text-xs sm:text-sm font-medium text-[#1C1C1C] flex gap-1">
                         {t("auth.use")}{" "}
-                        <p className="font-semibold">
+                        <span className="font-semibold">
                           {profileData?.data?.balance}
-                        </p>
+                        </span>
                       </p>
                       <div className="flex items-center gap-2 sm:gap-3">
                         <label className="flex items-center gap-1 cursor-pointer">
@@ -588,10 +545,8 @@ const ConfirmPage = () => {
                     isPending ||
                     !fio ||
                     fio.trim() === "" ||
-                    !phone ||
-                    phone.trim() === "" ||
+                    phoneDigits.length !== 10 ||
                     !selectedMethod ||
-                    (!fileName && !profileData?.data?.passport_image) ||
                     !agreeToPolicy
                   }
                 />
