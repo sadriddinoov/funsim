@@ -194,6 +194,9 @@ const Country = () => {
   };
 
   const countryNames = getCountryNames();
+  const stored = localStorage.getItem("selectedObject");
+  const obj = JSON.parse(stored);
+
 
   return (
     <>
@@ -274,15 +277,14 @@ const Country = () => {
                   <ArrowLeft size={16} className="text-[#1C1C1C] sm:size-5" />
                 </a>
                 <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-[35px] text-[#1C1C1C] font-semibold ml-4">
-                  {countryNames || t("main.no_results")}
+                  {obj.name || countryNames || t("main.no_results")}
                 </h1>
               </div>
             </div>
             {/* SIM CARDS */}
             <div
-              className={`${
-                plansData?.data?.data?.length == 0 && "!grid !grid-cols-1"
-              } grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 py-4 `}
+              className={`${plansData?.data?.data?.length == 0 && "!grid !grid-cols-1"
+                } grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 py-4 `}
             >
               {plansData?.data?.data?.filter(
                 (item: any) =>
@@ -290,41 +292,41 @@ const Country = () => {
                   (item.is_local === true &&
                     !(item?.b2b === 1 || item?.hide_site === true))
               ).length > 0 && (
-                <>
-                  <h2 className="col-span-full font-bold text-lg mb-2 text-black">
-                    Локальные тарифы
-                  </h2>
-                  {plansData?.data?.data
-                    .filter(
-                      (item: any) =>
-                        item.is_local === 1 ||
-                        (item.is_local === true &&
-                          !(item?.b2b === 1 || item?.hide_site === true))
-                    )
-                    .map((item: any, idx: any) => (
-                      <ESimCard
-                        tarrifName={item?.name}
-                        key={`local-${idx}`}
-                        flag={
-                          `${API_IMAGE}/${item?.region_group?.img}` ||
-                          ASSETS.noImage
-                        }
-                        gb={item.quantity_internet}
-                        days={item.expiry_day}
-                        price={formatPrice(item.price_sell)}
-                        onSelect={() => {
-                          localStorage.setItem("obyekt", JSON.stringify(item));
-                          setSelectedPackage(item?.id);
-                        }}
-                        isSelected={selectedPackage === item?.id}
-                        onShowAvailable={() => {
-                          setSelectedItem(item);
-                          setShowAvailableModal(true);
-                        }}
-                      />
-                    ))}
-                </>
-              )}
+                  <>
+                    <h2 className="col-span-full font-bold text-lg mb-2 text-black">
+                      Локальные тарифы
+                    </h2>
+                    {plansData?.data?.data
+                      .filter(
+                        (item: any) =>
+                          item.is_local === 1 ||
+                          (item.is_local === true &&
+                            !(item?.b2b === 1 || item?.hide_site === true))
+                      )
+                      .map((item: any, idx: any) => (
+                        <ESimCard
+                          tarrifName={item?.name}
+                          key={`local-${idx}`}
+                          flag={
+                            `${API_IMAGE}/${item?.region_group?.img}` ||
+                            ASSETS.noImage
+                          }
+                          gb={item.quantity_internet}
+                          days={item.expiry_day}
+                          price={formatPrice(item.price_sell)}
+                          onSelect={() => {
+                            localStorage.setItem("obyekt", JSON.stringify(item));
+                            setSelectedPackage(item?.id);
+                          }}
+                          isSelected={selectedPackage === item?.id}
+                          onShowAvailable={() => {
+                            setSelectedItem(item);
+                            setShowAvailableModal(true);
+                          }}
+                        />
+                      ))}
+                  </>
+                )}
 
               {/* REGION */}
               {plansData?.data?.data?.filter(
@@ -333,41 +335,41 @@ const Country = () => {
                   (item.is_region === true &&
                     !(item?.b2b === 1 || item?.hide_site === true))
               ).length > 0 && (
-                <>
-                  <h2 className="col-span-full font-bold text-lg mb-2 text-black">
-                    Региональные тарифы
-                  </h2>
-                  {plansData?.data?.data
-                    .filter(
-                      (item: any) =>
-                        item.is_region === 1 ||
-                        (item.is_region === true &&
-                          !(item?.b2b === 1 || item?.hide_site === true))
-                    )
-                    .map((item: any, idx: any) => (
-                      <ESimCard
-                        tarrifName={item?.name}
-                        key={`region-${idx}`}
-                        flag={
-                          `${API_IMAGE}/${item?.region_group?.img}` ||
-                          ASSETS.noImage
-                        }
-                        gb={item.quantity_internet}
-                        days={item.expiry_day}
-                        price={formatPrice(item.price_sell)}
-                        onSelect={() => {
-                          localStorage.setItem("obyekt", JSON.stringify(item));
-                          setSelectedPackage(item?.id);
-                        }}
-                        isSelected={selectedPackage === item?.id}
-                        onShowAvailable={() => {
-                          setSelectedItem(item);
-                          setShowAvailableModal(true);
-                        }}
-                      />
-                    ))}
-                </>
-              )}
+                  <>
+                    <h2 className="col-span-full font-bold text-lg mb-2 text-black">
+                      Региональные тарифы
+                    </h2>
+                    {plansData?.data?.data
+                      .filter(
+                        (item: any) =>
+                          item.is_region === 1 ||
+                          (item.is_region === true &&
+                            !(item?.b2b === 1 || item?.hide_site === true))
+                      )
+                      .map((item: any, idx: any) => (
+                        <ESimCard
+                          tarrifName={item?.name}
+                          key={`region-${idx}`}
+                          flag={
+                            `${API_IMAGE}/${item?.region_group?.img}` ||
+                            ASSETS.noImage
+                          }
+                          gb={item.quantity_internet}
+                          days={item.expiry_day}
+                          price={formatPrice(item.price_sell)}
+                          onSelect={() => {
+                            localStorage.setItem("obyekt", JSON.stringify(item));
+                            setSelectedPackage(item?.id);
+                          }}
+                          isSelected={selectedPackage === item?.id}
+                          onShowAvailable={() => {
+                            setSelectedItem(item);
+                            setShowAvailableModal(true);
+                          }}
+                        />
+                      ))}
+                  </>
+                )}
 
               {/* GLOBAL */}
               {plansData?.data?.data?.filter(
@@ -376,41 +378,41 @@ const Country = () => {
                   (item.is_global === true &&
                     !(item?.b2b === 1 || item?.hide_site === true))
               ).length > 0 && (
-                <>
-                  <h2 className="col-span-full font-bold text-lg mb-2 text-black">
-                    Глобальные тарифы
-                  </h2>
-                  {plansData?.data?.data
-                    .filter(
-                      (item: any) =>
-                        item.is_global === 1 ||
-                        (item.is_global === true &&
-                          !(item?.b2b === 1 || item?.hide_site === true))
-                    )
-                    .map((item: any, idx: any) => (
-                      <ESimCard
-                        tarrifName={item?.name}
-                        key={`global-${idx}`}
-                        flag={
-                          `${API_IMAGE}/${item?.region_group?.img}` ||
-                          ASSETS.noImage
-                        }
-                        gb={item.quantity_internet}
-                        days={item.expiry_day}
-                        price={formatPrice(item.price_sell)}
-                        onSelect={() => {
-                          localStorage.setItem("obyekt", JSON.stringify(item));
-                          setSelectedPackage(item?.id);
-                        }}
-                        isSelected={selectedPackage === item?.id}
-                        onShowAvailable={() => {
-                          setSelectedItem(item);
-                          setShowAvailableModal(true);
-                        }}
-                      />
-                    ))}
-                </>
-              )}
+                  <>
+                    <h2 className="col-span-full font-bold text-lg mb-2 text-black">
+                      Глобальные тарифы
+                    </h2>
+                    {plansData?.data?.data
+                      .filter(
+                        (item: any) =>
+                          item.is_global === 1 ||
+                          (item.is_global === true &&
+                            !(item?.b2b === 1 || item?.hide_site === true))
+                      )
+                      .map((item: any, idx: any) => (
+                        <ESimCard
+                          tarrifName={item?.name}
+                          key={`global-${idx}`}
+                          flag={
+                            `${API_IMAGE}/${item?.region_group?.img}` ||
+                            ASSETS.noImage
+                          }
+                          gb={item.quantity_internet}
+                          days={item.expiry_day}
+                          price={formatPrice(item.price_sell)}
+                          onSelect={() => {
+                            localStorage.setItem("obyekt", JSON.stringify(item));
+                            setSelectedPackage(item?.id);
+                          }}
+                          isSelected={selectedPackage === item?.id}
+                          onShowAvailable={() => {
+                            setSelectedItem(item);
+                            setShowAvailableModal(true);
+                          }}
+                        />
+                      ))}
+                  </>
+                )}
 
               {/* is_local === false */}
 
@@ -420,8 +422,8 @@ const Country = () => {
               {plansData?.data?.data?.filter(
                 (item: any) => !(item?.b2b === 1 || item?.hide_site === true)
               ).length === 0 && (
-                <p className="text-black text-center">Ничего не нашлось</p>
-              )}
+                  <p className="text-black text-center">Ничего не нашлось</p>
+                )}
             </div>
             <div
               className="fixed container md:left-0 md:bottom-26 bottom-19 flex justify-center right-0.5  px-4 z-40"
@@ -451,7 +453,7 @@ const Country = () => {
                 image={ASSETS.sms}
               />
               <ServiceCard
-                title={"5G"}
+                title={"4G"}
                 available={t("country.yes")}
                 image={ASSETS.fiveg}
               />
@@ -532,7 +534,7 @@ const Country = () => {
                 <button
                   title={t("login.submit")}
                   className="w-full mt-6 bg-[#FFB800] text-white rounded-lg py-2 sm:py-3 hover:bg-[#B8860B] cursor-pointer transition-colors text-base sm:text-lg"
-                  // onClick={handleLogin}
+                // onClick={handleLogin}
                 >
                   {t("auth.button")}
                 </button>
