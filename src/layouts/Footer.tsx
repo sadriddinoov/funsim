@@ -111,10 +111,10 @@ const Footer = () => {
       <div className="container justify-center pt-[33px] border-[#00000030] border-t-1  md:hidden flex flex-col gap-[30px]">
         <div className="flex justify-between gap-[20px]">
           <div className="flex flex-col gap-[20px]">
-            <a href="tel:+795 680 20 20" className="flex items-center gap-2">
+            <a href="tel:+7 (700) 776 07 07" className="flex items-center gap-2">
               <Phone width={16} color={"#ffffff80"} />
               <p className="text-[#FFFFFF] font-normal text-[12px]">
-                +795 680 20 20
+                +7 (700) 776 07 07
               </p>
             </a>
 
