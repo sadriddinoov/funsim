@@ -20,6 +20,7 @@ export const FooterNav = ({ openAuthModal }: FooterNavProps) => {
 
   const isActiveHome = normalizedPath === APP_ROUTES.HOME;
   const isActiveMySims =
+  
     normalizedPath === APP_ROUTES.MY_SIMS ||
     normalizedPath.startsWith(APP_ROUTES.MY_SIMS);
   const isActiveProfile =
