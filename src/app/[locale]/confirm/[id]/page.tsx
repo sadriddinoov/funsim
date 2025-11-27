@@ -199,13 +199,8 @@ const ConfirmPage = () => {
       return res.json();
     },
     onSuccess: (res) => {
-      if (
-        selectedMethodName?.key === "uzcard" ||
-        selectedMethodName?.key === "visa"
-      ) {
-        if (res?.payment_details) {
-          window.location.href = res.payment_details.payment_url;
-        }
+      if (res?.payment_details) {
+        window.location.href = res.payment_details.payment_url;
       }
 
       const orderId = res?.order_id ?? res?.data?.order_id;
@@ -246,7 +241,10 @@ const ConfirmPage = () => {
     const normalizedPhone = normalizeKzPhone(phoneDigits);
 
     console.log("========== ORDER CREATE ==========");
-    console.log("📞 Введённый номер (input):", formatKzPhoneDisplay(phoneDigits));
+    console.log(
+      "📞 Введённый номер (input):",
+      formatKzPhoneDisplay(phoneDigits)
+    );
     console.log("🇰🇿 Номер для API (KZ формат):", normalizedPhone);
     console.log("==================================");
 
@@ -290,7 +288,10 @@ const ConfirmPage = () => {
     const normalizedPhone = normalizeKzPhone(phoneDigits);
 
     console.log("============= AUTH =============");
-    console.log("📞 Введённый номер (input):", formatKzPhoneDisplay(phoneDigits));
+    console.log(
+      "📞 Введённый номер (input):",
+      formatKzPhoneDisplay(phoneDigits)
+    );
     console.log("🇰🇿 Номер для API (KZ формат):", normalizedPhone);
     console.log("================================");
 
