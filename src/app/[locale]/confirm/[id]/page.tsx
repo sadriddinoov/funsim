@@ -202,12 +202,7 @@ const ConfirmPage = () => {
       return res.json();
     },
     onSuccess: (res) => {
-      if (res?.payment_details) {
-        setQrUrl(res.payment_details.payment_url);
-        // setQrUrl(res.payment_details.payment_url);
-        // window.location.href = res.payment_details.payment_url;
-      }
-
+      setQrUrl(res.payment_details.payment_url);
       const orderId = res?.order_id ?? res?.data?.order_id;
       setOrderData(res);
 
@@ -362,20 +357,30 @@ const ConfirmPage = () => {
       {showOrderModal && (
         <div className="loading-overlay">
           {/* <LoadingWaiting selectedMethod={selectedMethod} /> */}
-          <div className="flex h-screen w-full items-center justify-center bg-gray-900">
+          <div className="flex h-screen w-full items-center justify-center flex-col bg-gray-900">
             <div className="flex flex-col items-center gap-6">
               {/* Logo */}
-              <Image
+              {/* <Image
                 src={ASSETS.logowhite}
                 alt="HappyTel Logo"
-                className="w-32 h-auto drop-shadow-xl"
-              />
+                className="w-64 h-auto drop-shadow-xl"
+              /> */}
 
               {/* Text with animated dots */}
-              <div className="md:max-w-none max-w-[90%] md:justify-normal justify-center flex-col  font-medium text-white flex items-end md:items-center">
+              <div className="flex flex-col items-center justify-center">
                 <QRCodeSVG value={qrUrl} size={256} />
-                <p className="mt-[20px]"> {t("payment.click")}</p>
+                <p className="mt-[20px] text-center"> {t("payment.click")}</p>
               </div>
+            </div>
+            <div className="block md:hidden">
+              <button
+                onClick={() => {
+                  window.location.href = qrUrl;
+                }}
+                className="mt-5 px-4 py-2 bg-[red] text-white font-semibold rounded-lg"
+              >
+                {t("auth.pay")}
+              </button>
             </div>
           </div>
 
