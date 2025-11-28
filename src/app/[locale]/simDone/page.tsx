@@ -154,7 +154,7 @@ const SimReady = () => {
                       {t("ready.need")}
                     </h4>
                     <a
-                      href="https://t.me/Happytel_support"
+                      href="https://wa.me/7007760707"
                       target="_blank"
                       className="text-[#FFB800] text-sm sm:text-lg font-normal cursor-pointer"
                     >
@@ -295,10 +295,10 @@ const SimReady = () => {
                     {t("ready.phonenum")}
                   </p>
                   <a
-                    href="tel:+7956802020"
+                    href="tel: +7 (700) 776 07 07"
                     className="text-sm sm:text-base font-normal bg-[#000000c8] text-white p-2 py-1 rounded-md hover:bg-[#3a3a3a] transition-colors duration-200"
                   >
-                    +795 680 20 20
+                     +7 (700) 776 07 07
                   </a>
                 </div>
 
@@ -307,10 +307,11 @@ const SimReady = () => {
                     {t("ready.bot")}
                   </p>
                   <a
-                    href="https://t.me/happytel"
+                    href="https://wa.me/7007760707"
+                    target="_blank"
                     className="text-sm sm:text-base font-normal bg-[#000000c8] text-white p-2 py-1 rounded-md hover:bg-[#3a3a3a] transition-colors duration-200"
                   >
-                    @happytel
+                    @funsim
                   </a>
                 </div>
               </div>
